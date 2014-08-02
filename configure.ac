@@ -1,6 +1,6 @@
 
 AC_PREREQ([2.68])
-AC_INIT([urlsnarf], [1.0], [damon@petta.org])
+AC_INIT([urlsnarf], [2.4], [damon@petta.org])
 AC_CONFIG_SRCDIR([src/base64.c])
 AM_INIT_AUTOMAKE
 AC_CONFIG_HEADERS([config.h])
