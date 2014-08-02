@@ -17,7 +17,6 @@
 #include <string.h>
 #include <err.h>
 #include <pcap.h>
-#include <pcap/nflog.h>
 #ifdef BSD
 #include <pcap-int.h>
 #endif

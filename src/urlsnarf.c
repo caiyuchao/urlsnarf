@@ -32,8 +32,6 @@
 #include "base64.h"
 #include "version.h"
 
-#include <pcap/nflog.h>
-
 #define DEFAULT_PCAP_FILTER "tcp port 80 or port 8080 or port 3128"
 
 u_short		Opt_dns = 1;
