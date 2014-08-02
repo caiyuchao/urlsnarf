@@ -196,11 +196,10 @@ process_http_request(struct tuple4 *addr, u_char *data, int len)
 		agent = escape_log_entry(agent);
 		cookie = escape_log_entry(cookie);
 
-//		json_object * log_request = json_object_new_object();
 		json_object * log_fields = json_object_new_object();
 
 		json_object *jreq_time = json_object_new_string(timestamp());
-		json_object *jsource = json_object_new_string("ridley_router");
+		json_object *jsource = json_object_new_string("router");
 		json_object *jdst_addr = json_object_new_string(
 			(vhost?vhost:libnet_addr2name4(addr->daddr, Opt_dns)));
 		json_object *jsrc_addr = json_object_new_string(
@@ -224,12 +223,6 @@ process_http_request(struct tuple4 *addr, u_char *data, int len)
 		json_object_object_add(log_fields,"cookies", jcookie);
 		json_object_object_add(log_fields,"user", juser);
 
-	   // My complelty fucked up attempt at nesting the json
-	   //fields = json_object_to_json_string(log_fields);
-	   //json_object_object_add(log_request,"@timestamp", jreq_time);
-	   //json_object_object_add(log_request,"@fields", fields);
-	   //fputs(json_object_to_json_string(log_request), stdout);
-	   //fputs("\n", stdout);
 
 		fputs(json_object_to_json_string(log_fields), stdout);
 		fputs("\n", stdout);
