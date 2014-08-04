@@ -25,7 +25,7 @@
 #include <libnet.h>
 #include <nids.h>
 #include <pcap.h>
-#include <json-c/json.h>
+//#include <json-c/json.h>
 
 #include "pcaputil.h"
 #include "buf.h"
@@ -194,7 +194,7 @@ process_http_request(struct tuple4 *addr, u_char *data, int len)
 		agent = escape_log_entry(agent);
 		cookie = escape_log_entry(cookie);
 
-		json_object * log_fields = json_object_new_object();
+		/* json_object * log_fields = json_object_new_object();
 
 		json_object *jreq_time = json_object_new_string(timestamp());
 		json_object *jsource = json_object_new_string("router");
@@ -224,14 +224,25 @@ process_http_request(struct tuple4 *addr, u_char *data, int len)
 
 		fputs(json_object_to_json_string(log_fields), stdout);
 		fputs("\n", stdout);
+		*/ 
 
+		printf("%s - %s [%s] \"%s http://%s%s\" - - \"%s\" \"%s\"%s\n",
+		libnet_addr2name4(addr->saddr, Opt_dns),
+		(user?user:"-"),
+		timestamp(), 
+		req, 
+		(vhost?vhost:libnet_addr2name4(addr->daddr, Opt_dns)), 
+		uri,
+		(referer?referer:"-"),
+		(agent?agent:"-"),
+		(cookie?cookie:"-"));
 
 		free(user);
 		free(vhost);
 		free(uri);
 		free(referer);
-        free(agent);
-        free(cookie);
+		free(agent);
+		free(cookie);
     }
 
 	fflush(stdout);
